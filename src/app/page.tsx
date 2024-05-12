@@ -12,13 +12,16 @@ const getMe = async () => {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
 		method: "GET",
 		cache: "no-store",
+		credentials: "include",
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			"Set-Cookie": `refreshToken=${refreshToken}`,
 		},
 	});
 	const data = await res.json();
-	if (!res.ok) throw new Error(data.message);
+	if (!res.ok) {
+		throw new Error(data.message);
+	}
 	return data.data;
 };
 

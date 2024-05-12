@@ -1,5 +1,6 @@
 "use client";
 
+import RefreshTokenMachine from "@/components/auth/refresh-token-machine";
 import {
 	createContext,
 	useCallback,
@@ -60,6 +61,7 @@ export default function AuthProvider({
 				isAuthenticated,
 			}}
 		>
+			{isAuthenticated && <RefreshTokenMachine />}
 			{children}
 		</AuthContext.Provider>
 	);
