@@ -1,4 +1,10 @@
-# Next Authentication with JWT
+# Next.js(App Router) + HTTP-Only Cookies for Authentication
+
+An example application that demonstrates using HTTP-only cookies for secure authentication with Next.js.
+
+## API Server
+
+- [API Server](https://github.com/hungify/hello-nest)
 
 ## Login
 
