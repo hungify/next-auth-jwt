@@ -1,13 +1,12 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-	const formData = await request.formData();
-	const rawBody = Object.fromEntries(formData);
+	const body = await request.json();
 
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
 		method: "POST",
-		body: JSON.stringify(rawBody),
+		body: JSON.stringify(body),
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -27,18 +26,18 @@ export async function POST(request: Request) {
 
 	const cookiesFromResponse = res.headers.getSetCookie();
 
-	const cookieStore = cookies();
+	const response = NextResponse.json(json, {
+		headers: {
+			"Set-Cookie": cookiesFromResponse.join(", "),
+		},
+	});
 
-	cookieStore.set("accessToken", json.data.accessToken, {
+	response.cookies.set("accessToken", json.data.accessToken, {
 		httpOnly: true,
 		secure: true,
 		sameSite: "strict",
 		path: "/",
 	});
 
-	return NextResponse.json(json, {
-		headers: {
-			"Set-Cookie": cookiesFromResponse.join(", "),
-		},
-	});
+	return response;
 }

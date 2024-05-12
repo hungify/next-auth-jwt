@@ -33,16 +33,12 @@ export default function LoginForm() {
 	const authContext = useAuthContext();
 
 	const onSubmit = (body: AuthOutput["loginBodyRequest"]) => {
-		const formData = new FormData();
-		for (const [key, value] of Object.entries(body)) {
-			formData.append(key, value);
-		}
-
 		startTransition(async () => {
 			toast.promise(
 				fetch(`${process.env.NEXT_PUBLIC_URL}/api/auth/login`, {
 					method: "POST",
-					body: formData,
+					body: JSON.stringify(body),
+					credentials: "include",
 				}).then(async (res) => {
 					const data = await res.json();
 					if (!res.ok) {
