@@ -54,41 +54,6 @@ export default function RegisterForm() {
 				},
 			});
 		});
-
-		// const promise = new Promise((resolve, reject) => {
-		// 	fetch(`${process.env.NEXT_PUBLIC_NEXT_PUBLIC_API_URL}/auth/register`, {
-		// 		method: "POST",
-		// 		body: JSON.stringify(body),
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 	})
-		// 		.then(async (res) => {
-		// 			const json = await res.json();
-		// 			if (!res.ok) {
-		// 				reject(json);
-		// 			}
-		// 			resolve(json);
-		// 		})
-		// 		.catch((error) => {
-		// 			reject(new HttpError(error));
-		// 		});
-		// });
-		// toast.promise(promise, {
-		// 	loading: "Registering...",
-		// 	success: "Successfully registered!",
-		// 	error: (error: HttpError) => {
-		// 		if (error.statusCode === 422 && Array.isArray(error.message)) {
-		// 			error.message.map((message) => {
-		// 				form.setError(message.property, {
-		// 					message: message.message,
-		// 				});
-		// 			});
-		// 			return "Validation error!";
-		// 		}
-		// 		return error.message;
-		// 	},
-		// });
 	};
 
 	return (
